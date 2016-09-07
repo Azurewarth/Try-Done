@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<script>
+	
+	window.onload = function () {
+		var oDiv = document.getElementById('bar');
+		var oSpan = document.getElementsByTagName('span')[0];
+		var oDivC = document.getElementById('content');
+
+
+		oDivC.onclick =function(){
+			progress(oDiv, 'width', 3, parseInt(getStyle(oDivC, 'width')));
+		}
+
+		function progress(obj,attr,dir,target){
+
+			clearInterval(obj.timer);
+			
+			obj.timer= setInterval(function(){
+
+				var speed =  parseInt(getStyle(obj,attr)) + dir;
+				var percent = parseInt(speed / target * 100);
+			
+				if (speed > target)
+				{
+					speed = target;
+					obj.style[attr] = target + 'px';
+					oSpan.innerHTML = 100 + '%';
+					clearInterval(obj.timer);
+				}
+
+				obj.style[attr] = speed + 'px';
+				oSpan.innerHTML = percent + '%';
+				
+				
+
+			},50);
+		}
+
+		function getStyle(obj,attr){
+			return obj.getStyle?obj.getStyle[attr]:getComputedStyle(obj)[attr];
+		}
+	}
+</script>
+<style>
+	#content{border: 1px solid black; width: 500px; height: 40px;position: relative;}
+	#bar {position: absolute;height: inherit; background: red;}
+	span {position: absolute;height: inherit; width: 50px; left: 225px; line-height: 40px;}
+
+</style>
+<body>
+	<div id='content'><div id='bar'><span></span></div></div>
+</body>
+</html>

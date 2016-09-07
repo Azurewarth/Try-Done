@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script>
+window.onload=function(){
+	var m=new menu('menu');
+	var b=new bouncing('bouncing');
+	var r=new rebound('rebound');
+
+	m.oDiv.onclick=function(){
+		m.oDiv.style.background='yellow';
+	}
+}
+
+function menu(id){
+	var _this=this;
+	this.oDiv=document.getElementById(id);
+
+	this.oDiv.onmouseover=function(){
+		_this.change(_this.oDiv,300);
+	}
+	this.oDiv.onmouseout=function(){
+		_this.change(_this.oDiv,50);
+	}
+}
+
+menu.prototype.change=function(obj,itarget){
+	var iSpeed=0;
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function(){		
+	iSpeed=(itarget-obj.offsetWidth)>0?Math.ceil((itarget-obj.offsetWidth)/8):Math.floor((itarget-obj.offsetWidth)/8);
+	if(obj.offsetWidth==itarget)
+	{
+		clearInterval(obj.timer);
+		obj.style.width=itarget + 'px';
+	}
+	obj.style.width=obj.offsetWidth + iSpeed + 'px';
+},30)
+}
+
+function bouncing (id){
+	var _this=this;
+	this.oDiv = document.getElementById(id);
+
+	this.oDiv.onclick=function(){
+		_this.go(_this.oDiv, 300);
+	}
+}
+
+bouncing.prototype.go=function(obj,itarget){
+	var iSpeed=0;
+	var l=0;
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function(){
+		iSpeed += (itarget-obj.offsetLeft)/8;
+		iSpeed *= 0.7;
+		l = parseInt(obj.offsetLeft + iSpeed);
+		if(iSpeed<1 && obj.offsetLeft==itarget)
+		{
+			clearInterval(obj.timer);
+			obj.style.left=itarget;
+			alert(obj.style.left);
+		}
+		obj.style.left= l + 'px'; 
+	},30)
+}
+
+function rebound(id){
+	var _this=this;
+	this.oDiv =document.getElementById(id);
+	this.oDiv.onclick=function(){
+		_this.restrict(_this.oDiv);
+	}
+}
+rebound.prototype.restrict=function(obj){
+	var iSpeedX=8;
+	var iSpeedY=12;
+
+	obj.timer=setInterval(function(){
+		iSpeedY+=3;	
+		var L = obj.offsetLeft+iSpeedX;
+		var T = obj.offsetTop+iSpeedY;
+		
+		if(T>(document.documentElement.clientHeight-obj.offsetHeight))
+		{
+			T=document.documentElement.clientHeight-obj.offsetHeight;
+			iSpeedY*=-0.8;
+			iSpeedX*=0.8;
+		} else if (T<0)
+		{
+			T=0;
+			iSpeedY*=-0.8;
+			iSpeedX*=0.8;
+		}
+		if(L>(document.documentElement.clientWidth-obj.offsetWidth))
+		{
+			L=(document.documentElement.clientWidth-obj.offsetWidth)+'px';
+			iSpeedX*=-0.8;
+		} else if (L<0)
+		{
+			L=0;
+			iSpeedX*=-0.8;
+		}
+		
+		obj.style.left=L+'px';
+		obj.style.top=T+'px';
+
+	},30);
+}
+
+</script>
+<style>
+	div {width: 50px; height: 50px; background: red;}
+	#bouncing {position: absolute; top: 200px; background: blue;}
+	#rebound {position: absolute; top:400px; background: green;}
+</style>
+</head>
+<body>
+	<div id="menu"></div>
+	<div id="bouncing"></div>
+	<div id="rebound"></div>
+</body>
+</html>

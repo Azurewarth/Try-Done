@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<style>
+	div{width: 500px;}
+	#title0 {background: #4273e2; height: 50px; border-radius: 4px;}
+	#content ul {background: #f1f1f1; border-radius: 4px; position: relative;}
+	#content .content1 {position: absolute;}
+	ul, li{padding: 0px; margin: 0px; list-style: none;}
+	ul li { display:inline-block; font-size: 14px; line-height: 26px;}
+	li {border-right: 1px solid #F06;}
+	#title0 li, #content li {margin-left: 20px;padding-right: 14px; margin-top: 14px; margin-bottom: 10px;}
+	.last{float: right; border: none; padding: none;}
+	.content1{border: none;}
+	#li0 {left: -20px; display: none;}
+	#li1 {left: 40px; display: none;}
+	#li2 {left: 120px; display: none;}
+	#li3 {left: 180px; display: none;}
+	#li4 {margin-right: -80px; display: none;}
+
+	#title0 li:hover {text-decoration: underline;}
+	.content1 li:hover {text-decoration: underline;}
+</style>
+
+<script>
+	
+window.onload = function () {
+
+	var oDiv = document.getElementById('title0');
+	var aLi_title = oDiv.getElementsByTagName('li');
+	var aLi_content = document.getElementsByClassName('content2');
+	var timer =null;
+	for (var i=0; i<aLi_title.length; i++)
+	{
+		aLi_title[i].index = i;
+		aLi_content[i].index = i;
+		aLi_title[i].onmouseover = show;
+		aLi_title[i].onmouseout = hide;
+		aLi_content[i].onmouseover = show;
+		aLi_content[i].onmouseout = hide;
+
+	}
+
+	function show(){
+
+		clearInterval(timer);
+		for (var i =0; i<aLi_content.length; i++)
+			{
+				aLi_content[i].style.display = 'none';
+			}
+		aLi_content[this.index].style.display = 'block';
+	}
+	
+	function hide(){
+		
+			timer = setTimeout(function(){
+			for (var i =0; i<aLi_content.length; i++)
+			{
+				aLi_content[i].style.display = 'none';
+			}
+			}, 500);
+	}
+
+
+
+
+
+}
+
+</script>
+
+<body>
+	
+<div>
+	<div id='title0'>
+	<ul>
+		<li>首页</li>
+		<li>关于我们</li>
+		<li>作品</li>
+		<li>博客</li>
+		<li class="last">>>更多</li>
+	</ul>
+	</div>
+
+
+	<ul id='content'>
+		<li class='content1 content2' id="li0">
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li class="last">4</li>
+			</ul>
+		</li>
+		<li class='content1 content2' id='li1'>
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li class="last">4</li>
+			</ul>
+		</li>
+		<li class='content1 content2' id="li2">
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li class="last">4</li>
+			</ul>
+		</li>
+		<li class='content1 content2' id="li3">
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li >3</li>
+				<li class="last">4</li>
+			</ul>
+		</li>
+		<li class="last content2" id="li4">
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li class="last">4</li>
+			</ul>
+		</li>
+	</ul>
+</div>
+</body>
+</html>

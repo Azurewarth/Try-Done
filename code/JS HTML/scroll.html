@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+<script>
+window.onload=function(){
+	var scroll = document.getElementById('scrollNav');
+	var bar = document.getElementById('scrollBar');
+	var oDiv = document.getElementById('content');
+
+	scroll.onmousedown=function(ev){
+		var ev = ev || event;
+		var disY = ev.clientY - scroll.offsetTop;
+		var iMaxtop = bar.offsetHeight - scroll.offsetHeight;
+
+		document.onmousemove=function(ev){
+			var ev = ev || event;
+			var Y=ev.clientY - disY;
+			var iScale = scroll.offsetTop / iMaxtop;
+			if(Y<0)
+			{
+				Y=0;
+			}
+			if(Y>iMaxtop)
+			{
+				Y=iMaxtop;
+			}
+			scroll.style.top = Y + 'px';
+			oDiv.style.height = 500*iScale + 'px';
+		}
+
+		document.onmouseup=function(){
+			document.onmousemove=document.onmouseup=null;
+		}
+
+	}
+}
+</script>
+<style>
+	#scrollBar {position: absolute; width: 30px; height: 500px; top: 10px; left: 10px; background: #000;}
+	#scrollNav {position: absolute; width: 30px; height: 30px; background: #f1f1f1;}
+	#content {position: absolute; width: 300px; top: 10px; left: 50px; background: blue;}
+</style>
+</head>
+
+
+<body>
+	
+	<div id="scrollBar">
+		<div id="scrollNav"></div>
+	</div>
+	<div id="content"></div>
+</body>
+</html>

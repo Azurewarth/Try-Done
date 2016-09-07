@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>search</title>
+<script>
+function mySearch(data){
+	var oUl = document.getElementById('getList');
+	var oInp = document.getElementsByName('inp1')[0];
+	var html='';
+	var ali=[];
+	var aA=[];
+	if(data.s.length)
+	{
+	oUl.style.display='block';
+	oUl.innerHTML='';
+	for(var i=0; i<data.s.length; i++)
+	{
+		ali[i]=document.createElement('li');
+		aA[i]=document.createElement('a');
+		aA[i].href="";
+		aA[i].innerHTML=data.s[i];
+		ali[i].appendChild(aA[i]);
+		//ali[i].innerHTML='<a href="">'+data.s[i]+'</a>'
+		oUl.appendChild(ali[i]);
+		// html+='<li><a href="">'+data.s[i]+'</a></li>';
+	} 
+	// oUl.innerHTML=html; 
+	} else {
+		oUl.style.display='none';
+	}
+
+}
+window.onload = function(){
+	var oInp = document.getElementsByName('inp1')[0];
+	var oUl = document.getElementById('getList');
+
+	oInp.onkeyup = function(){
+	if (this.value != ''){
+	var oScript = document.createElement('script');
+	oScript.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+ this.value+'&cb=mySearch';
+	document.body.appendChild(oScript);
+	} else {
+		oUl.innerHTML='';
+		oUl.style.display='none';
+	}
+}
+
+}
+</script>
+<style>
+	ul, li {margin: 0px; padding: 0px; list-style:none;}
+	ul {border: 1px solid green; width: 200px; display:none;}
+	li {height: 40px; width: 200px;}
+	input {border: 1px solid orange; margin-bottom:10px; width: 200px;}
+</style>
+</head>
+<body>
+	<input type="text" name="inp1" />
+	<ul id="getList"></ul>
+</body>
+</html>

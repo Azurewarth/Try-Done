@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+
+<style>
+	ul,li{padding: 0px; margin: 0px; list-style: none;}
+
+	ul {float: left; margin:30px 60px 0 60px;}
+
+	li {border: 1px black solid; margin-top: 10px; height: 30px; width: 50px;}
+
+	div {height: 200px; width: 120px; position: absolute; top: 50px; left: 120px;}
+</style>
+
+<script>
+	
+	window.onload = function () {
+		var aUl = document.getElementsByTagName('ul');
+		var oDiv = document.getElementById('div1');
+		var aLi = [];
+		var Li1 = null;
+		var Timer = null;
+		var num=0;
+
+
+		for(var i =0; i<aUl.length; i++)
+		{
+			Li1 = aUl[i].getElementsByTagName('li');
+			for(var j = 0; j<Li1.length; j++)
+			{
+				aLi.push(Li1[j]);
+			}
+		}
+
+		action();
+
+		oDiv.onmouseover = stop;
+		oDiv.onmouseout = action;
+
+		for (var i=0; i<aUl.length; i++)
+		{
+			aUl[i].onmouseover = stop;
+			aUl[i].onmouseout = action;
+		}
+
+
+		function action(){
+
+			clearInterval(Timer);
+			Timer = setInterval(function(){
+			for(var i=0; i<aLi.length; i++)
+			{
+				aLi[i].style.background = 'none';
+			}
+			aLi[num].style.background = 'green';
+			num++;
+			if (num==10)
+			{
+				num=0;
+			}
+		},500);
+		}
+		function stop(){
+			clearInterval(Timer);
+		}
+		
+		
+	}
+</script>
+
+<body>
+	
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<div id='div1'></div>
+	<ul>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Transition</title>
+<style type="text/css">
+	div {position: relative;width: 500px;height: 800px; left: 30%; border: 4px solid #f1f1f1;border-radius: 6px;}
+	input[type="text"] {position: absolute;width: 400px; height: 300px; left: 50px; top:30px; border: 2px solid #f1f1f1;}
+	input[type="button"] {position: absolute;left: 40%;top: 350px; width: 100px; height: 30px; text-align: center;line-height: 30px; font-size: 18px;border:2px solid #f1f1f1; border-radius: 4px;}
+	input[type="button"]:hover {background: #fd5826; color:#FFF;}
+	span {position: absolute; width: 100px; height: 30px; top:390px; left: 40%; text-align: center;line-height: 30px;}
+	ul, li {margin: 0px;padding: 0px;list-style: none;}
+	ul {position: absolute; top: 430px; left: 44%; display: none;}
+	li {display: inline-block; width: 6px; height: 12px; background: #ffa302;}
+	p {position: absolute; width: 400px; height: 300px; top: 450px; left: 50px; border: 2px solid #f1f1f1;}
+</style> <!--style-->
+
+<script type="text/javascript">
+window.onload = function(){
+	var aInp = document.getElementsByTagName('input');
+	var oSpan= document.getElementsByTagName('span')[0];
+	var oUl = document.getElementsByTagName('ul')[0];
+	var aLi = document.getElementsByTagName('li');
+	var oP = document.getElementsByTagName('p')[0];
+
+	var barTimer = null;
+	var calcTimer = null;
+	var transTimer = null;
+
+	aInp[1].onclick = function(){
+		calculation();
+		bar();
+		transMove();
+	}
+
+	function calculation(){
+		var strNum = aInp[0].value.length;
+		var strSpan = '';
+		oSpan.style.display = 'block';
+		oSpan.innerHTML = strNum+'/'+strNum;
+		calcTimer = setInterval(function(){
+			var nowStrNum = aInp[0].value.length;
+			oSpan.innerHTML = nowStrNum+'/'+strNum;
+		},100)
+	}// calcTimer
+	function bar(){
+		oUl.style.display='block';
+		var num=0;
+		barTimer=setInterval(function(){
+			for(var i=0;i<aLi.length;i++)
+			{
+				aLi[i].style.background='#ffa302';
+			}
+			aLi[num].style.background = '#fcef1d';
+			num++;			
+			num%=aLi.length;
+		},100)
+	}// barTimer
+	function transMove(){
+		transTimer=setInterval(function(){
+			var str=aInp[0].value.slice(0,1);
+			aInp[0].value=aInp[0].value.substring(1);
+			oP.innerHTML +=str;
+			if(!aInp[0].value)
+			{
+				clearInterval(barTimer);
+				clearInterval(calcTimer);
+				clearInterval(transTimer);
+				oSpan.style.display = 'none';
+				oUl.style.display = 'none';
+			}
+		},100)
+	}// transTimer
+}
+</script>
+</head>
+<body>
+	<div>
+		<input type="text">
+		<input type="button" value="开始移动">
+		<span></span>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<p></p>
+	</div>
+</body>
+</html>

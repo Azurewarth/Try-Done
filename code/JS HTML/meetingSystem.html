@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Meeting System</title>
+<script>
+window.onload = function(){
+		var oSpan=document.getElementById('date');
+		var aTd = document.getElementsByTagName('td');
+		var oForm=document.getElementById('oButton');
+		var dateForm=document.getElementById('inpDate');
+		var aBtn = oForm.getElementsByTagName('input');
+		var dateBtn=dateForm.getElementsByTagName('input');
+		var oDate=new Date();
+		var strDate='';
+
+		str=oDate.getMonth()+1 + '月  ' + oDate.getDate()+ '日';
+		oSpan.innerHTML = str;
+
+		oSpan.onclick=function(){
+			dateForm.style.display='block';
+		}
+		dateBtn[2].onclick=function(){
+
+			if(dateBtn[0].value=='' || dateBtn[1].value=='')
+			{
+				alert('请输入日期！');
+			}
+			else {
+				oSpan.innerHTML=dateBtn[0].value+'月  '+dateBtn[1].value+'日  ';
+				dateForm.style.display='none';
+				dateBtn[0].value='';
+				dateBtn[1].value='';
+			}
+			
+
+		}
+		for(var i=0;i<aTd.length;i++)
+		{
+			aTd[i].index=0;
+		}
+
+		for(var i=0; i<aTd.length; i++)
+		{
+			aTd[i].onclick=function(){
+			if(this.className!='active' || this.className!='rechoose')
+			{
+				this.style.background="#6af121";
+				this.index=1;
+			}
+			if(this.className=='active')
+			{
+				this.className='rechoose';
+				this.style.background='#f16621';
+			}
+		}
+	}
+
+		aBtn[0].onclick=function(){
+			for(var i=0;i<aTd.length;i++)
+			{
+				if(aTd[i].index==1)
+				{
+					aTd[i].innerHTML='已定';
+					aTd[i].className='active';
+				}
+			}
+		}
+		aBtn[1].onclick=function(){
+			for(var i=0;i<aTd.length;i++)
+			{
+				if(aTd[i].className=='rechoose')
+				{
+					aTd[i].style.background='';
+					aTd[i].index=0;
+					aTd[i].innerHTML='';
+				}
+			}
+		}
+		aBtn[2].onclick=function(){
+			for(var i=0;i<aTd.length;i++)
+			{
+				if(aTd[i].className!='name')
+				{
+				aTd[i].style.background='';
+				aTd[i].className='';
+				aTd[i].innerHTML='';
+				aTd[i].index=0;
+			}
+			}
+		}
+}
+</script>
+<style>
+	table {position: absolute; top: 90px; }
+	th,td {margin:0px; padding:0px;width: 100px; height: 80px; border: 2px solid #f1f1f1; font-size: 16px; line-height; text-align: center;}
+	div {position: relative;}
+	#inpDate {position: absolute; top: 60px; left: 40px; display: none;}
+	td:hover {border: 2px solid #fb6b02;}
+	.name:hover {border:2px solid #f1f1f1;}
+	#address {position: absolute; top: 20px; left: 78%; width: 80px;}
+	#date {position: absolute; top:10px; left: 30px; width: 200px; height: 40px; line-height:40px; font-size: 18px; border: 1px solid black; display: inline-block; line-height: 40px; text-align: center; border-radius: 6px;}
+	#date:hover {background: #f65607;}
+	#oButton {position: absolute; bottom: 30px; right: 50px;}
+
+</style>
+</head>
+<body>
+	<div>
+		<span id='date'></span>
+		<form action="" id='inpDate'>
+		<input type="text" value=""> 月
+		<input type="text" value=""> 日
+		<input type="button" value="确定" />
+		</form>
+	</div>
+	<table>
+		<thead>
+			<tr>
+				<th>时间</th>
+				<th>8:00-8:30</th>
+				<th>8:30-9:00</th>
+				<th>9:00-9:30</th>
+				<th>9:30-10:00</th>
+				<th>10:00-10:30</th>
+				<th>10:30-11:00</th>
+				<th>11:00-11:30</th>
+				<th>11:30-12:00</th>
+				<th>13:00-13:30</th>
+				<th>13:30-14:00</th>
+				<th>14:00-14:30</th>
+				<th>14:30-15:00</th>
+				<th>15:00-15:30</th>
+				<th>15:30-16:00</th>
+				<th>16:00-16:30</th>
+				<th>16:30-17:00</th>
+				<th>17:00-17:30</th>
+				<th>17:30-18:00</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class='name'>1号会议室</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class='name'>2号会议室</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class='name'>3号会议室</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class='name'>4号会议室</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class='name'>5号会议室</td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	<form action="" id="oButton">
+	<input type="button" value="确定" />
+	<input type="button" value="取消" />
+	<input type="button" value="重置" />
+	</form>
+</body>
+</html>

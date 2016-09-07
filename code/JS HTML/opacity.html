@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<script>
+	
+	window.onload = function () {
+
+		var oDiv = document.getElementsByTagName('div')[0];
+
+		oDiv.onclick = function(){
+			opa (this,1,0,'opacity');
+		}
+
+		function opa (obj,dir,target,attr){
+
+			clearInterval(obj.timer);
+			obj.timer = setInterval(function(){
+				
+
+				if (getStyle(obj,attr)<target)
+				{
+					obj.style[attr] = target;
+					clearInterval(obj.timer);
+				}
+				obj.style[attr] = (getStyle(obj,attr)*100 - dir) / 100;
+
+			},50);
+
+
+		}
+
+		function getStyle(obj,attr)
+		{
+			return obj.currentStyle?obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+		}
+	}
+</script>
+
+<style>
+	
+	div {border: 1px solid black; width: 500px; height: 60px; background:blue;}
+</style>
+
+<body>
+	
+	<div></div>
+
+</body>
+</html>

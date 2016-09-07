@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script>
+window.onload = function () {
+	var mC = document.getElementById('myC');
+	var mGC= mC.getContext('2d');
+	
+	yImg = new Image();
+
+	yImg.onload = function(){
+		mC.height=yImg.height;
+		mGC.drawImage(yImg,0,0);
+		var ImgData = mGC.getImageData(0,0,yImg.width, yImg.height);
+		var oImg=mGC.createImageData(yImg.width,yImg.height);
+		for (var i=0; i<ImgData.data.length; i+=4)
+		{
+			oImg.data[i]=255-ImgData.data[i];
+			oImg.data[i+1]=255-ImgData.data[i+1];
+			oImg.data[i+2]=255-ImgData.data[i+2];
+			oImg.data[i+3]=ImgData.data[i+3];
+		}
+		mGC.putImageData(oImg,yImg.width,0);
+		}
+	yImg.src = '1.jpg';
+	
+}
+
+</script>
+<style>
+	body {background: black;}
+	canvas {background: white;}
+</style>
+</head>
+<body>
+	<canvas id="myC" width="1600" height="400"></canvas>
+</body>
+</html>

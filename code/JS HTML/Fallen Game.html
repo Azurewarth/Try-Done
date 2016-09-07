@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Fallen Game</title>
+<script type="text/javascript">
+window.onload = function  () {
+	var oBtn = document.getElementsByTagName('button')[0];
+	var oDiv = document.getElementById('game');
+	var aSpan = oDiv.getElementsByTagName('span');
+	var fallenDiv = document.getElementById('fallen');
+	var ini = 0;
+	var score=0;
+	var faliure=0;
+
+	ini = parseInt(getStyle(oDiv,'left'));
+
+	fallenDiv.onclick=function(){
+		game();
+		var randomNum = Math.floor(Math.random()*10);
+		doMove(fallenDiv,'top',randomNum,440, function(){
+			shake(oDiv,'left',ini);
+		});
+
+		score++;
+	}
+	
+	oBtn.onclick = function() {
+		
+		for(var i=0; i<10;){
+		var randomNum = Math.floor(Math.random()*10);
+		game();
+		doMove(fallenDiv,'top',randomNum,440, function(){
+			shake(oDiv,'left',ini);
+		});
+		i++;
+		}
+		
+	}
+
+	function getStyle(obj,attr){
+		return obj.currentStyle? obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+	}
+	function shake(obj,attr,ini,endFn){
+		var arr=[];
+		var num=0;
+		for (var i=20; i>0; i--)
+		{
+			arr.push(i, -i);
+		}
+		arr.push(0);
+		clearInterval(obj.timer);
+		obj.style[attr]=ini +'px';
+		obj.timer = setInterval(function(){
+		obj.style[attr] = parseInt(getStyle(obj, attr)) + arr[num] + 'px';
+		num++;
+		if (num===arr.length)
+		 {
+			clearInterval(obj.timer);
+			num=0;
+			endFn&&endFn();
+		 }
+		}, 30)
+	}
+	function doMove(obj,attr,dir,target,endFn)
+	{
+		clearInterval(obj.timer);
+		var speed = null;
+		obj.timer = setInterval(function(){
+		speed=parseInt(getStyle(obj,attr))+dir;
+		if (speed > target)
+		{
+			speed = target;
+			clearInterval(obj.timer);
+			endFn && endFn();
+		}
+		obj.style[attr] = speed + 'px';
+	},50);	
+	}
+	function game(){
+		var randomLeft = Math.floor(Math.random()*600) + 'px';
+		fallenDiv.style.display = 'block';
+		fallenDiv.style.top = 0 + 'px';
+		fallenDiv.style.left = randomLeft;
+	}
+}
+</script>
+
+
+<style type="text/css">
+	button {position: absolute; top:50px; left: 45%;}
+	#game {position: relative; top: 100px; left: 25%; width: 600px; height: 440px; border: 1px black solid;}
+	#score {position: absolute; top: -1px; left: -102px; width: 100px; height: 60px; background: #f1f1f1; border: 1px solid black;}
+	#game div span {display: block; width: 100px; height: 30px;}
+	#fallen {position: absolute;top:0px; left:0px; height: 30px; width:30px; background:#000; display: none;}
+</style>
+
+</head>
+<body>
+	<button>开始游戏</button>
+	<div id="game">
+		<div id="score">
+			<span></span>
+			<span></span>
+		</div>
+		<div id="fallen"></div>
+	</div>
+</body>
+</html>

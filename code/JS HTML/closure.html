@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<script src="doMove_getStyle.js"></script>
+<script>
+	
+	window.onload = function() {
+		var oBtn1 = document.getElementById('prev');
+		var oBtn2 = document.getElementById('backward');
+		var oDiv = document.getElementById('div1');
+
+		oBtn1.onclick = function(){
+			doMove(oDiv, 12, 'left', 800);
+		}
+		oBtn2.onclick = function(){
+			doMove(oDiv, 12, 'left', 10);
+		}
+
+}
+
+</script>
+
+<style>
+	
+	div {position: absolute; height: 50px; width: 50px; background: red; top: 40px; left: 10px;}
+</style>
+
+<body>
+	
+<button id="prev">向前</button>
+<button id="backward">向后</button>
+
+<div id="div1"></div>
+
+
+</body>
+</html>

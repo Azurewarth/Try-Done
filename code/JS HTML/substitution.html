@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>substitution</title>
+<style type="text/css">
+	ul,li {padding: 0px;margin: 0px; list-style: none;}
+	#textArea {position: relative; left: 30%;}
+	#textArea p {position: absolute; width: 500px; border:4px solid #f1f1f1; border-radius: 8px;}
+	#textArea ul {position: absolute;left: 510px; top:16px;}
+	#textArea ul li {margin-bottom:10px; width: 40px; height: 20px; color:#FFF; text-align: center; line-height: 20px; background:#03a1c3;}
+	#textArea ul li:hover {cursor: pointer; background: #4dd4f1; color:black;}
+	#textArea span {background: #f1df18;}
+	#operArea {position: relative; left: 30%; top: 200px; border:4px solid #f1f1f1; width: 500px; height: 100px; border-radius: 8px; display: none;}
+	#operArea a {position: absolute; top:10px; display: inline-block; width: 60px; height: 20px; background:#fe8e09;border-radius:4px; text-align: center; font-size: 12px; line-height: 20px; text-decoration: none; color:#f1f1f1;}
+	#operArea a:hover {cursor:pointer;background:#f75f24;color:black;}
+	#operArea div {position: absolute; top: 30px; width:500px; padding-top: 20px; border-top:2px solid #09d3fe;}
+	#operArea span {margin-left: 10px;}
+	#operArea input {margin-left: 10px; height: 20px;}
+</style> <!--style-->
+
+<script type="text/javascript">
+window.onload = function(){
+	var divText = document.getElementById('textArea');
+	var divOper = document.getElementById('operArea');
+	var aLi = divText.getElementsByTagName('li');
+	var funcDiv = divOper.getElementsByTagName('div');
+	var aA = divOper.getElementsByTagName('a');
+	var oP = divText.getElementsByTagName('p')[0];
+	var aInp = [];
+	var onOff = true;
+
+	for(var i=0;i<aLi.length;i++)
+	{
+		if(i===0)
+		{
+			aLi[i].style.display = 'block';
+		} else {
+			aLi[i].style.display = 'none';
+		}
+	} 
+	for(var i=0;i<aA.length;i++)
+	{
+		aA[i].style.left = 20+62*i + 'px';
+	} 
+	for(var i=0;i<funcDiv.length;i++)
+	{
+		var arr=funcDiv[i].getElementsByTagName('input');
+		for(var j=0;j<arr.length;j++)
+		{
+			aInp.push(arr[j]);
+		}
+	}// initiation
+	
+	aLi[1].onclick = checkShow;
+	aLi[2].onclick = substitutionShow;
+	aA[0].onclick = checkShow;
+	aA[1].onclick = substitutionShow;
+
+	aInp[1].onclick = check;
+	aInp[4].onclick = substitution;
+
+
+	aLi[0].onclick = function(){
+		goBackOp();
+		if(onOff)
+		{
+			this.innerHTML = '隐藏';
+			for(var i=0;i<aLi.length;i++)
+			{
+				aLi[i].style.display = 'block';
+			}
+			onOff=!onOff;
+		} else {
+			this.innerHTML = '展开';
+			divOper.style.display = 'none';
+			for(var i=0;i<aLi.length;i++)
+			{
+			if(i===0)
+			{
+				aLi[i].style.display = 'block';
+			} else {
+				aLi[i].style.display = 'none';
+			}
+			}
+			onOff=!onOff;
+		} 
+	}
+	function checkShow(){
+		divOper.style.display = 'block';
+		funcDiv[0].style.display = 'block';
+		funcDiv[1].style.display = 'none';
+		aA[0].style.background = '#f75f24';
+		aA[1].style.background = '#fe8e09';
+	}
+	function substitutionShow(){
+		divOper.style.display = 'block';
+		funcDiv[1].style.display = 'block';
+		funcDiv[0].style.display = 'none';
+		aA[1].style.background = '#f75f24';
+		aA[0].style.background = '#fe8e09';
+	}
+	function check(){
+		goBackOp();
+		var str='';
+		var arrAfter=[];
+		var arrCheck=[];
+		str = aInp[0].value;
+		if(!str) return alert('please enter the words');
+		arrAfter=oP.innerHTML.split(str);
+		oP.innerHTML = arrAfter.join('<span>'+str+'</span>');
+		aInp[0].value='';
+	}
+	function substitution(){
+		goBackOp();
+		var strCheck='';
+		var strSub = '';
+		var arrAfter=[];
+		var arrCheck=[];
+		strCheck = aInp[2].value;
+		strSub = aInp[3].value;
+		if(!strCheck && !strSub) return alert('please enter the words');
+		arrAfter=oP.innerHTML.split(strCheck);
+		oP.innerHTML = arrAfter.join(strSub);
+		aInp[2].value='';
+		aInp[3].value='';
+	}
+	function goBackOp(){
+		var arrLeft =[];
+		var arrRight=[];
+		var opTrans = '';
+		arrLeft=oP.innerHTML.split('<span>');
+		opTrans=arrLeft.join('');
+		arrRight=opTrans.split('</span>');
+		oP.innerHTML=arrRight.join('');
+	}
+	 // function
+}
+</script>
+
+
+</head>
+<body>
+	<div id='textArea'>
+		<p>
+		虽然大部分媒体鲜有提及，但根据《体育画报》报道，勇士顾问纳什也在这次招募杜兰特的战役中送出了自己的助攻。之前勇士方面对拉来杜兰特有一定信心，他们主要觉得杜兰特虽然在个人方面忠诚于维斯布鲁克，但在球场上，他其实已经很厌倦维斯那种长时间霸球的打法，而库里展示的是一种自由流动的进攻，这是两位顶级控卫之间最大的不同。但多位勇士教练、高层都认为，如果不是纳什的助攻，杜兰特来不来还很难说。“没有纳什的话，我不确定我们是否能得到杜兰特。”其中一位人士表示。在这次6队招募杜兰特的会晤中，勇士呈现的东西并没有特别高于其它对手。勇士总经理迈尔斯也表示：“我们听说快船深深打动了他，而我们却没有做到。”
+		</p>
+		<ul>
+			<li>展开</li>
+			<li>查找</li>
+			<li>替换</li>
+		</ul>
+	</div>
+
+	<div id='operArea'>
+		<a>查找</a>
+		<a>替换</a>
+		<div>
+			<span>查找：</span><input type="text" />
+			<input type="button" value="查找" />
+		</div>
+		<div>
+			<span>原文：</span><input type="text">
+			<span>替换：</span><input type="text">
+			<input type="button" value="替换" />
+		</div>
+	</div>
+	
+</body>
+</html>

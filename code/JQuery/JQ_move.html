@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script src="jquery-3.1.0.js"></script>
+<script>
+	$(function(){
+		$('#div1').click(function(){
+			$(this).animate({width: 200, height:200}, 1000).animate({left: 100, top:100},1000);
+		});
+		$('span').click(function(){
+			$('#div1').finish();
+		})
+	})
+</script>
+<style>
+	div {position: relative; height: 100px; width: 100px; background: red;}
+	span {position:absolute; left: 300px; background: red; margin-top: 10px;}
+
+</style>
+</head>
+<body>
+	<div id='div1'></div>
+	<span>spanspan</span>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS test</title>
+
+
+<style>
+
+#oWindow {
+
+	width: 300px;
+	height: 300px;
+	border: 2px solid black;
+	background: #f1f1f1;
+	display: none;
+	position: absolute;
+	left: 600px;
+	z-index: 999;
+
+}
+#oDiv1 {
+
+	width: 100px;
+	height: 100px;
+	border: 2px solid black;
+	background: #f1f1f1;
+	position: absolute;
+	left: 150px;
+}
+
+#title, h1{
+
+	font-size: 15px;
+	line-height: 30px;
+	display: inline-block;
+	margin-top: 15px;
+	margin-left: 60px;
+
+}
+#original {
+	font-size: 15px;
+	line-height: 30px;
+	display: inline-block;
+	outline: none;
+}
+
+.li_name, .box, .btn {
+
+	display: inline-block;
+	height: 30px;
+	margin-top: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: 20px;
+	line-height: 30px;
+	color:blue;
+}
+
+.btn {
+	position: relative;
+	top:40px;
+	left: 90px;
+	
+}
+
+
+
+
+}
+
+</style>
+
+<script>
+
+
+window.onload = function(){
+
+var oWindow = document.getElementById('oWindow'); 
+var oDiv1 = document.getElementById('oDiv1'); 
+
+
+document.getElementById('original').onclick=function (){
+
+	oWindow.style.display = "block";
+}
+
+document.getElementById('confirm').onclick=function (){
+
+	oWindow.style.display = "none";
+}
+
+document.getElementById('reset').onclick=function (){
+
+	oDiv1.style.background = "#f1f1f1";	
+	oDiv1.style.width = "100px";
+	oDiv1.style.height = "100px";
+	oDiv1.style.height = "4px black solid";
+}
+
+document.getElementById('oRed').onclick=function (){
+
+	oDiv1.style.background = "red";
+}
+document.getElementById('oBlue').onclick=function (){
+
+	oDiv1.style.background = "blue";
+}
+
+document.getElementById('oYellow').onclick=function (){
+
+	oDiv1.style.background = "yellow";
+}
+document.getElementById('h200').onclick=function (){
+
+	oDiv1.style.height = "200px";
+}
+document.getElementById('h400').onclick=function (){
+
+	oDiv1.style.height = "400px";
+}
+document.getElementById('h800').onclick=function (){
+
+	oDiv1.style.height = "800px";
+}
+document.getElementById('w200').onclick=function (){
+
+	oDiv1.style.width = "200px";
+}
+document.getElementById('w400').onclick=function (){
+
+	oDiv1.style.width = "400px";
+}
+document.getElementById('w800').onclick=function (){
+
+	oDiv1.style.width = "800px";
+}
+
+}
+</script>
+
+</head>
+
+
+<body>
+
+	<div id="title">
+		
+		<h1>请为以下DIV添加样式：</h1>
+		<input id="original" type="button" name="" value="添加样式" />
+
+	</div>
+	<div id="oDiv1"></div>
+
+	<div id="oWindow">
+		
+		
+			<div class="li_name">请添加颜色：</div>
+			<div class="box">	
+			<input id="oRed" type="button" name="" value="红色" style="background:red" />
+			<input id="oBlue" type="button" name="" value="蓝色" style="background:blue" />
+			<input id="oYellow" type="button" name="" value="黄色" style="background:yellow" />
+			</div>
+			
+			
+			<div class="li_name">请修改高度：</div>
+			<div class="box">
+			<input id="h200" type="button" name="" value="200" />
+			<input id="h400" type="button" name="" value="400" />
+			<input id="h800" type="button" name="" value="800" />
+			</div>
+		
+			<div class="li_name">请修改宽度：</div>
+			<div class="box">
+			<input id="w200" type="button" name="" value="200" />
+			<input id="w400" type="button" name="" value="400" />
+			<input id="w800" type="button" name="" value="800" />
+			</div>
+		
+			<input class="btn"  id="reset" type="button" name="" value="重置">
+			<input class="btn"  id="confirm" type="button" name="" value="确定">
+	
+
+	</div>
+
+
+
+</body>
+</html>

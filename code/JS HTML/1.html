@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>qq</title>
+</head>
+
+<style>
+	
+	ul,li,h2 {margin: 0px; padding: 0px; list-style: none; text-align: center;}
+
+	#list {width: 80px;height: 30px; position: relative; margin: 0 auto;}
+
+	.lis li, .lis h2{width: 80px; height: 30px;font-size: 10px; line-height: 30px; border: 1px black solid;}
+
+	.lis ul {display: none;}
+
+	h2 {background: #ccc;}
+
+	.active {background: blue;}
+
+</style>
+
+<script>
+	
+window.onload = function () {
+	var oUL = document.getElementById('list');
+	var aH2 = oUL.getElementsByTagName('h2');
+	var aUL = oUL.getElementsByTagName('ul');
+	var aLi = '';
+	var num = 0;
+	var arrLi = [];
+	var oLdUl = aUL[num];
+	var oLdLi;
+
+	for (var i =0; i<aH2.length; i++)
+	{
+		aH2[i].index = i;
+	}
+
+	for (var i=0; i<aH2.length; i++)
+	{
+		aH2[i].onclick = function()
+		{
+			for(var j=0; j<aH2.length; j++)
+			{
+				aH2[j].className= '';
+			}
+
+			oLdUl.style.display= 'none';
+			oLdUl = aUL[this.index];
+
+			if (this.className === '')
+			{
+				aUL[this.index].style.display = 'block';
+				this.className = 'active';
+			}
+			else
+			{
+				aUL[this.index].style.display = 'none';
+				this.className = '';
+			}
+		}
+	}		
+
+	for (var i = 0; i<aUL.length; i++)
+	{
+		aLi = aUL[i].getElementsByTagName('li');
+		for (var j=0; j<aLi.length; j++)
+		{
+			arrLi.push(aLi[j]);
+		}
+	}
+
+	oLdLi = arrLi[num];
+	
+	for (var i =0; i<arrLi.length; i++)
+	{
+		arrLi[i].onclick = function()
+		{
+
+			oLdLi.className = '';
+			oLdLi = this;
+			
+			/* for (var j=0; j<arrLi.length; j++)
+			{
+				arrLi[j].className = '';
+			}
+			*/
+
+			if (this.className === '')
+			{
+				this.className = 'active';
+			}
+			else
+			{
+				this.className = '';
+			}
+		}
+	}		
+
+
+}
+
+
+</script>
+
+<body>
+	
+	<ul id="list">
+		<li class="lis">
+			<h2>我的好友</h2>
+			<ul>
+				<li>1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ul>
+		</li>
+		<li class="lis">
+			<h2>企业好友</h2>
+			<ul>
+				<li>6</li>
+				<li>7</li>
+				<li>8</li>
+				<li>9</li>
+			</ul>
+		</li>
+		<li class="lis">
+			<h2>黑名单</h2>
+			<ul>
+				<li>11</li>
+				<li>22</li>
+				<li>33</li>
+			</ul>
+		</li>
+	</ul>
+
+
+</body>
+
+</html>
