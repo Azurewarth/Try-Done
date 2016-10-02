@@ -1,8 +1,10 @@
-angular.module('shop',[]).controller('myCtrl', function ($scope) {
+angular.module('shop',[])
 
-	$scope.cart= 
 
-	[
+.service('cart',function(){
+	
+	return [
+
 		{
 			id: 1,
 			name: 'iphone5',
@@ -28,6 +30,14 @@ angular.module('shop',[]).controller('myCtrl', function ($scope) {
 			price: 3000
 		}
 	];
+})
+
+
+.controller('myCtrl', function ($scope,cart) {
+
+
+	$scope.cart = cart;
+
 
 	$scope.totalPrice = function (){
 		var total = 0;
