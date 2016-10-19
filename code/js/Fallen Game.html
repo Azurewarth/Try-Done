@@ -1,4 +1,4 @@
-<!doctype html>
+  <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -90,7 +90,7 @@ window.onload = function  () {
 <style type="text/css">
 	button {position: absolute; top:50px; left: 45%;}
 	#game {position: relative; top: 100px; left: 25%; width: 600px; height: 440px; border: 1px black solid;}
-	#score {position: absolute; top: -1px; left: -102px; width: 100px; height: 60px; background: #f1f1f1; border: 1px solid black;}
+	#instruct {position: absolute; top: -1px; left: -102px; width: 100px; height: 60px; background: #f1f1f1; border: 1px solid black;}
 	#game div span {display: block; width: 100px; height: 30px;}
 	#fallen {position: absolute;top:0px; left:0px; height: 30px; width:30px; background:#000; display: none;}
 </style>
@@ -99,9 +99,9 @@ window.onload = function  () {
 <body>
 	<button>开始游戏</button>
 	<div id="game">
-		<div id="score">
-			<span></span>
-			<span></span>
+		<div id='instruct'>
+			<span>点击黑色方块消除</span>
+			<span>方块运动至底部游戏结束</span>
 		</div>
 		<div id="fallen"></div>
 	</div>

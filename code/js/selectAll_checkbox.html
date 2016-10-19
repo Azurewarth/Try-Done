@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<script>
+	
+window.onload = function (){
+
+		var aInp = document.getElementsByTagName('input');
+		var num = aInp.length-1;
+		var a=0;
+
+		aInp[num].onclick = function(){
+
+			if(this.checked){
+				for (var i=0; i<aInp.length-1;i++)
+				{
+					aInp[i].checked = true;
+				}
+			} else {
+				for (var i=0; i<aInp.length-1;i++)
+				{
+					aInp[i].checked = false;
+				}
+			}
+		}
+
+		for (var i =0; i<aInp.length-1; i++)
+		{
+			aInp[i].onclick = function(){
+
+				a=0;
+				for(var i=0; i<aInp.length-1; i++)
+				{
+					if(aInp[i].checked === true)
+					{
+						a++;
+					}
+				}
+
+			if(a===aInp.length-1)
+			{
+				aInp[aInp.length-1].checked = true;
+			} else{
+				aInp[aInp.length-1].checked = false;
+			}
+		}
+	}
+
+}
+</script>
+
+<body>
+	<lable for='1'>1 option</lable>
+	<input id='1' type="checkbox">
+	<lable for='2'>2 option</lable>
+	<input id='2' type="checkbox">
+	<lable for='3'>3 option</lable>
+	<input id='3' type="checkbox">
+	<lable for='4'>4 option</lable>
+	<input id='4' type="checkbox">
+	<lable for='5'>All Select</lable>
+	<input id='5' type="checkbox">
+
+</body>
+</html>
