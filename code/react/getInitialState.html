@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../../vendor/react-15.3.1/build/react.min.js"></script>
+    <script src="../../vendor/react-15.3.1/build/react-dom.min.js"></script>
+    <script src="browser.min.js"></script>
+</head>
+<body>
+	<div id="app"></div>
+
+
+	<script type="text/babel">
+		
+		var MessageBox = React.createClass({
+
+			getInitialState: function(){
+				return {
+					isVisible: true,
+					titleMessage:"message from initial",
+					countClick:0,
+					submessages:[
+						"fetch the bricks",
+						"fetch the bricks again",
+						"and again"
+					]
+				}
+				
+			},
+
+			toCount:function(){
+				this.setState({
+					countClick: this.state.countClick+1,
+				})
+			},
+			toShow:function(){
+				this.setState({
+					isVisible:!this.state.isVisible,
+				})
+			},
+
+			render: function(){
+
+				var styleObj={
+					display: this.state.isVisible? "block":"none",
+				}
+
+				return (
+					<div>
+						<h1 style={styleObj}>{this.props.title }</h1>
+						<button onClick={this.toCount}>clickMe to count</button>
+						<button onClick={this.toShow}>clickMe to show</button>
+						<p>countNum:{this.state.countClick}</p>
+						<SubMessage messages={this.state.submessages}/>
+					</div>
+				)
+			}
+
+		});
+
+		var SubMessage = React.createClass({
+
+			propTypes:{
+				messages: React.PropTypes.array.isRequired,
+			},
+
+			getDefaultProps:function(){
+				return {
+					messages:["I am Default"]
+
+				}
+			},
+
+			render:function(){
+
+				var arr=[];
+				this.props.messages.forEach(function(msg,index){
+					arr.push(
+						<p>we always say: {msg}</p>
+					)
+
+				});
+
+				return (
+					<div>
+						<h3>Are you seeing me?</h3>
+						<div>{arr}</div>
+					</div>
+				)
+			}
+
+		});
+
+		var title="from props in outer!";
+
+		var showApp=ReactDOM.render(
+			<MessageBox title={title}/>,
+			document.getElementById("app")
+
+		);
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vendor/react-15.3.1/build/react.min.js"></script>
+    <script src="../../vendor/react-15.3.1/build/react-dom.min.js"></script>
+    <script src="browser.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    
+    <script type="text/babel">
+    
+    var getStateMixin = {
+        
+        componentWillMount:function(){
+            this.oldState=[];
+        },
+        componentWillUpdate:function(nextProp,nextState){
+            this.oldState.push(nextState);
+        },
+        lastState:function(){
+            var index=this.oldState.length-1; 
+            return index==-1?[]:this.oldState[index];
+        },
+    }
+
+    var Message = React.createClass({
+        
+        mixins:[getStateMixin],
+        
+        getInitialState: function(){
+            console.log("getInitialState");
+            return {
+                message:"I am a message",
+                count:0
+            }
+        },
+        
+        doUpdate:function(){
+            this.setState({
+                count:this.state.count+1,
+            }); 
+            
+            console.log(this.lastState().count);
+        },
+        
+        killcomp:function(){
+            ReactDOM.unmountComponentAtNode(ReactDOM.findDOMNode(this.refs.aSub));
+        },
+        
+        render: function(){
+            
+            console.log("xuanran");
+            return (
+                <div>
+                <h1>{this.state.message}</h1>
+                <p>test about lifecycle</p>
+                <button onClick={this.killcomp}>kill something!</button>
+                <h2>{this.state.count}</h2>
+                <button onClick={this.doUpdate}>updating</button>
+                <br/>
+                <Submessage ref="aSub" aCount={this.state.count}/>
+                </div>
+            )
+        }
+        
+    });
+
+    var Submessage = React.createClass({
+        
+        mixins:[getStateMixin],
+        
+        getInitialState:function(){
+            return {
+                count:0,
+            }
+        },
+        
+        componentWillReceiveProps:function(nextProp){
+            this.setState({
+                count: this.props.aCount *2,
+            })
+        },
+        componentWillUpdate:function(){
+            console.log(this.lastState().count);
+        },
+        
+        render:function(){
+            return (
+                <div>
+                    <h1>I am a submessage::{this.state.count}</h1> 
+                </div> 
+            )
+        }
+    });
+
+    var LifeApp=ReactDOM.render(
+        <Message />,
+        document.getElementById("app")
+    )
+    
+    
+    </script>
+</body>
+</html>

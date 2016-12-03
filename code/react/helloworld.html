@@ -5,13 +5,51 @@
     <title>Hello React!</title>
     <script src="../../vendor/react-15.3.1/build/react.min.js"></script>
     <script src="../../vendor/react-15.3.1/build/react-dom.min.js"></script>
-    <script src="http://static.runoob.com/assets/react/browser.min.js"></script>
+    <script src="browser.min.js"></script>
   </head>
 <body>
     <div id="example"></div>
     <script type="text/babel">
+
+        var MessageBox = React.createClass({
+            
+            render:function(){
+
+                var messages=[];
+
+                for(var i=0; i<10; i++){
+                    messages.push(<Submsg/>)
+                }
+
+                return (
+
+                    <div>
+                        <h1>hello</h1>
+                        {messages}
+                    </div>
+                )
+            }
+            
+        });
+
+        var Submsg = React.createClass({
+            render:function(){
+                return (
+                    <div>
+                        <p onClick={this.alertMe}>here is the repeart</p>
+                    </div>
+                )
+            },
+
+            
+            alertMe:function(){
+                alert("world");
+            }
+        });
+
         ReactDOM.render(
-            <h1>hello World</h1>,
+             
+            <MessageBox />,
             document.getElementById('example')
         );
     </script>  

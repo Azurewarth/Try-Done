@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vendor/react-15.3.1/build/react.min.js"></script>
+    <script src="../../vendor/react-15.3.1/build/react-dom.min.js"></script>
+    <script src="browser.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    
+    <script type="text/babel">
+    
+    var Message = React.createClass({
+        
+        getInitialState: function(){
+            console.log("getInitialState");
+            return {
+                message:"I am a message",
+                count:0
+            }
+        },
+        
+        getDefaultProps: function(){
+            
+        },
+        
+        componentWillMount:function(){
+            
+        },
+                                    
+        componentDidMount:function(){
+            
+        },
+        componentWillUnmount:function(){
+            
+        },
+        killcomp:function(){
+            ReactDOM.unmountComponentAtNode(document.getElementById("app"));
+        },
+        shouldComponentUpdate:function(nextProp,nextState){
+            console.log("shouldComponentUpdate");
+            return true;  //nextState.count<5?true:false;
+        },
+        componentWillUpdate:function(nextProp,nextState){
+            console.log("componentWillUpdate");
+            console.log(nextProp);
+            console.log(nextState);
+        },
+        componentDidUpdate:function(){
+            console.log("componentDidUpdate");
+        },
+        doUpdate:function(){
+            this.setState({
+                count:this.state.count+1,
+            });    
+        },
+        
+        render: function(){
+            
+            console.log("xuanran");
+            return (
+                <div>
+                <h1>{this.state.message}</h1>
+                <p>test about lifecycle</p>
+                <button onClick={this.killcomp}>kill something!</button>
+                <h2>{this.state.count}</h2>
+                <button onClick={this.doUpdate}>updating</button>
+                <br/>
+                <Submessage aCount={this.state.count}/>
+                </div>
+            )
+        }
+        
+    });
+
+    var Submessage = React.createClass({
+        
+        componentWillReceiveProps:function(nextProp){
+            console.log("componentWillReceiveProps");
+        },
+        shouldComponentUpdate:function(nextProp,nextState){
+            return nextProp.aCount>5?false:true;
+        },
+        render:function(){
+            return (
+                <div>
+                    <h1>I am a submessage::{this.props.aCount}</h1> 
+                </div> 
+            )
+        }
+    });
+
+    var LifeApp=ReactDOM.render(
+        <Message />,
+        document.getElementById("app")
+    )
+    
+    
+    </script>
+</body>
+</html>

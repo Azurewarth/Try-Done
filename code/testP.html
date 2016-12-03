@@ -1,0 +1,34 @@
+
+ 
+
+ <script>
+function pairwise(arr, arg) {
+
+  var num=0;
+  var temp=0;
+  
+  for(var i=0;i<arr.length;i++){
+      
+    for(var k=i;k<arr.length;k++){
+      temp=arr[i]+arr[k];
+      if(temp!==arg){
+        
+
+      } else {
+        num+=i;
+        num+=k;
+        
+        arr[i]=arr[k]="nothing";
+      }
+    }
+  }
+    
+  console.log(arr);
+  return num;
+}
+
+
+     pairwise([1, 3, 2, 4], 4);
+   
+</script>
+ 

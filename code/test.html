@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+<script src="../vendor/jquery/jquery-3.1.0.min.js"></script>
+<script>
+var Person = function(firstAndLast) {
+    
+  var nameArr = firstAndLast.split(" ");
+  
+  var lastName = nameArr[1];
+  var firstName= nameArr[0];
+  
+  this.getFirstName=function(){
+    return firstName;
+  };
+  this.getLastName=function(){
+    return lastName;
+  };
+  this.getFullName=function(){
+    return firstName+" "+lastName;
+  };
+  this.setFisrtName=function(first){
+    firstName=first;
+  };
+  this.setLastName=function(last){
+    lastName=last;
+  };
+  this.setFullName=function(firstAndLast){
+    var name=firstAndLast.split(" ");
+    firstName=name[0];
+    lastName=name[1];
+  };
+  
+};
+
+var bob = new Person('Bob Ross');
+console.log(bob.getFirstName());
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

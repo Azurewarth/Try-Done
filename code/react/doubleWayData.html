@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vendor/react-15.3.1/build/react.min.js"></script>
+    <script src="../../vendor/react-15.3.1/build/react-dom.min.js"></script>
+    <script src="../../vendor/react-15.3.1/build/react-with-addons.min.js"></script>
+    <script src="browser.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    
+    
+    <script type="text/babel">
+    
+        var Message = React.createClass({
+            
+            mixins: [React.addons.LinkedStateMixin],
+            
+            getInitialState: function(){
+                return {
+                    aMessage : "this is a message",
+                    aState : true
+                }
+            },
+            
+            render : function(){
+                return (
+                    <div>
+                        <h1>A:{this.state.aMessage}</h1>
+                        <h2>B:{this.state.aState? "bucuo" : "qusi"}</h2>
+                        <input type="text" valueLink={this.linkState('aMessage')}/>
+                        <input type="checkbox" checkedLink={this.linkState('aState')}/>  
+                        <br/>
+                        <Sub linkMessage={this.linkState('aMessage')} likeState={this.linkState('aState')}/>         
+                    </div>
+                )
+            }
+        });
+    
+        var Sub = React.createClass({
+            render: function(){
+                
+                return (
+                    <div>
+                        
+                        <h3>sub</h3>
+                        <input type="text" valueLink={this.props.linkMessage}/>
+                        <input type="checkbox" checkedLink={this.props.likeState}/>
+                        <br/>
+                        
+                        <SubSub linkMessage={this.props.linkMessage} likeState={this.props.likeState}/>
+                        
+                    </div> 
+                )
+            }
+            
+        });
+        
+
+
+        var SubSub = React.createClass({
+            
+            render: function(){
+                
+                return (
+                    <div>
+                        <h4>subsub</h4>   
+                        <input type="text" valueLink={this.props.linkMessage}/>
+                        <input type="checkbox" checkedLink={this.props.likeState}/> 
+                    </div>
+                )
+            }
+            
+        });
+
+    var linkApp = ReactDOM.render(<Message />,
+        document.getElementById('app')                             
+    );
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vendor/react-15.3.1/build/react.min.js"></script>
+    <script src="../../vendor/react-15.3.1/build/react-dom.min.js"></script>
+    <script src="browser.min.js"></script>
+</head>
+<body>
+    
+    <div id="app"></div>
+    
+    
+    <script type="text/babel">
+    
+        var FormApp=React.createClass({
+            
+            getInitialState:function(){
+              return {
+                  inputValue: "this is inputValue",
+                  selectValue: "A",
+                  textareaValue:"this is textareaValue",
+                  radioValue:"A",
+                  checkValue:["A"]
+              }  
+            },
+            
+            submitChange:function(e){
+              e.preventDefault();
+              var formData={
+                  
+                  input:ReactDOM.findDOMNode(this.refs.aInput).value,
+                  select:this.refs.aSelect.value,
+                  textarea:this.refs.aTextarea.value,
+                  radio: this.state.radioValue,
+                  checkbox: this.state.checkValue
+                  
+              }
+              
+              console.log(formData);
+              
+                this.refs.choose.say();
+                
+            },
+            
+            render:function(){
+                
+                return (
+                
+                    <form onSubmit={this.submitChange}>
+                         <input ref={function(prom){ReactDOM.findDOMNode(prom).focus();}} type="text" defaultValue={this.state.inputValue} />
+                         <br />
+                          <select ref="aSelect" defaultValue={this.state.selectValue}>
+                              <option value="A">A</option>
+                              <option value="B">B</option>
+                              <option value="C">C</option>
+                              <option value="D">D</option>
+                              <option value="E">E</option>
+                          </select>
+                          <br />
+                          <RadioBox ref="choose" Radio={this.handleRadio}/>
+                          <br/>
+                          <CheckBox Check={this.handleCheckbox}/>
+                          <textarea ref="aTextarea" defaultValue={this.state.textareaValue}></textarea>               
+                          <br/>
+                          <button type="submit">submit</button>   
+                    </form>
+                
+                )
+                
+            },
+            
+            handleRadio:function(e){
+                this.setState({
+                    radioValue: e.target.value
+                })
+            },
+            
+            handleCheckbox:function(e){
+                
+                var checkValue=this.state.checkValue.slice(); 
+                var newValue = e.target.value;
+                var index = checkValue.indexOf(newValue);
+                if(index == -1){
+                    checkValue.push( newValue );
+                } else {
+                    checkValue.splice(index,1);
+                }
+                
+                this.setState({
+                    checkValue: checkValue,
+                })
+            }
+            
+        });
+
+        var RadioBox = React.createClass({
+            render:function(){
+                return (
+                    <div>
+                        A
+                        <input onChange={this.props.Radio} type="radio" name="choose" value="A" defaultChecked/>
+                        B
+                        <input onChange={this.props.Radio} type="radio" name="choose" value="B" />
+                        C
+                        <input onChange={this.props.Radio} type="radio" name="choose" value="C" />
+                    </div>
+                )
+            },
+            
+            say:function(){
+                alert("Submit success!");
+            }
+            
+        });
+
+        var CheckBox = React.createClass({
+            render:function(){
+                return (
+                    <div>
+                        A
+                        <input onChange={this.props.Check} type="checkbox" name="mutiChoose" value="A" defaultChecked/>
+                        B
+                        <input onChange={this.props.Check} type="checkbox" name="mutiChoose" value="B" />
+                        C
+                        <input onChange={this.props.Check} type="checkbox" name="mutiChoose" value="C" />
+                    </div>
+                )
+            }
+            
+        });
+    
+        var aForm=ReactDOM.render(
+            <FormApp />,
+            document.getElementById("app")
+        );
+    
+    </script>
+    
+    
+</body>
+</html>

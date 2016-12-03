@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../../vendor/react-15.3.1/build/react.min.js"></script>
+    <script src="../../vendor/react-15.3.1/build/react-dom.min.js"></script>
+    <script src="browser.min.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+    
+    <script type="text/babel">
+    
+    var Message = React.createClass({
+        
+        getInitialState: function(){
+            console.log("getInitialState");
+            return {
+                message:"I am a message",
+                count:0
+            }
+        },
+        
+        getDefaultProps: function(){
+            console.log("getDefaultProps");
+            return {
+                
+            }
+        },
+        
+        componentWillMount:function(){
+            
+          console.log("componentWillMount");
+            
+          var self=this;
+            
+            this.timer=setInterval(function(){
+                self.setState({
+                count:self.state.count+1,
+            })
+            },1000);
+        
+        },
+                                    
+        componentDidMount:function(){
+          console.log("componentDidMount");  
+        },
+        componentWillUnmount:function(){
+          alert("Are you sure?!");
+            
+            clearInterval(this.timer);
+        },
+        killcomp:function(){
+            ReactDOM.unmountComponentAtNode(document.getElementById("app"));
+        },
+        render: function(){
+            
+            console.log("xuanran");
+            return (
+                <div>
+                <h1>{this.state.message}</h1>
+                <p>test about lifecycle</p>
+                <button onClick={this.killcomp}>kill something!</button>
+                <h2>{this.state.count}</h2>
+                </div>
+            )
+        }
+        
+    });
+
+    var LifeApp=ReactDOM.render(
+        <Message />,
+        document.getElementById("app")
+    )
+    
+    
+    </script>
+</body>
+</html>
